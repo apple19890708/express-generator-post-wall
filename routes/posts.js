@@ -40,4 +40,20 @@ router.patch('/:id', async (req, res, next) => {
 	})
 })
 
+router.delete('/', async (req, res, next) => {
+	const post = await Post.deleteMany({});
+  res.status(200).json({
+		status: "success",
+    post
+  })
+})
+
+router.delete('/:id', async (req, res, next) => {
+	const posts = await Post.findByIdAndUpdate(req.params.id)
+	res.status(200).json({
+    status: "success",
+		post: posts
+  })
+})
+
 module.exports = router;
