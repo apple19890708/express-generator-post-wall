@@ -1,59 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const Post = require("../models/postsModel")
+const PostsControllers = require('../controllers/post');
 
-router.get('/', async (req, res, next) => {
-	const post = await Post.find();
-  res.status(200).json({
-    post
-  })
-});
+router.get('/', PostsControllers.getPosts);
 
-router.post('/', async (req, res, next) => {
-	const newPost = await Post.create({
-		content: req.body.content,
-		image: req.body.image,
-		name: req.body.name
-	})
-	res.status(200).json({
-    status: "success",
-		post: newPost
-  })
-})
+router.post('/', PostsControllers.createdPosts);
 
-router.patch('/:id', async (req, res, next) => {
-	console.log('req.params.id', req.params.id)
-	const posts = await Post.findByIdAndUpdate(
-		req.params.id, 
-		{
-			content: req.body.content,
-			image: req.body.image,
-			name: req.body.name
-		},
-		{
-			returnDocument: 'after',
-		}
-	);
-	res.status(200).json({
-		status: "success",
-		post: posts
-	})
-})
 
-router.delete('/', async (req, res, next) => {
-	const post = await Post.deleteMany({});
-  res.status(200).json({
-		status: "success",
-    post
-  })
-})
+router.patch('/:id', PostsControllers.updatePosts);
 
-router.delete('/:id', async (req, res, next) => {
-	const posts = await Post.findByIdAndUpdate(req.params.id)
-	res.status(200).json({
-    status: "success",
-		post: posts
-  })
-})
+router.delete('/', PostsControllers.deleteAllPosts);
+
+router.delete('/:id', PostsControllers.deleteSinglePosts);
 
 module.exports = router;
