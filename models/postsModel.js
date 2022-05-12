@@ -1,3 +1,4 @@
+const { default: mongoose } = require('mongoose');
 const {Schema, model} = require('mongoose');
 
 const postSchema = new Schema(
@@ -12,13 +13,18 @@ const postSchema = new Schema(
 		},
 		createdAt: {
 			type: Date,
-			default: Date.now(),
+			default: Date.now, //位配合創造貼文的新增時間把()移除
 			select: false
 		},
-		name: {
-				type: String,
-				required: [true, '貼文姓名未填寫']
+		user: { // 為引用user資料表的相關資訊
+			type: mongoose.Schema.ObjectId,
+			ref:"user", // 表示連接哪張資料表，不能寫 users 是因為 mongo 會自動幫加 s
+			required: [true, '貼文 ID 未填']
 		},
+		// name: {
+		// 		type: String,
+		// 		required: [true, '貼文姓名未填寫']
+		// },
 		likes: {
 				type:Number,
 				default:0

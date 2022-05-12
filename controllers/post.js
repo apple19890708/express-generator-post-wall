@@ -4,15 +4,28 @@ const Post = require("../models/postsModel");
 
 const posts = {
   async getPosts(req, res) {
-    const allPosts = await Post.find();
-    handleSuccess(res, allPosts);
+    // const post = await Post.find().populate({
+		// 	path: 'user',
+		// 	select: 'name photo'
+		// });
+
+		// 貼文關鍵字搜尋與篩選
+		const timeSort = req.query.timeSort == "asc" ? "createdAt":"-createdAt"
+		const q = req.query.q !== undefined ? {"content": new RegExp(req.query.q)} : {};
+		const post = await Post.find(q).populate({
+				path: 'user',
+				select: 'name photo'
+	  }).sort(timeSort);
+    handleSuccess(res, post);
   },
   async createdPosts(req, res) {
     try {
       const { body } = req;
+			const userId = '626bf8b06793149aa8f975f9';
       if (body.content) {
         const newPost = await Post.create({
-          name: body.name,
+          // user: body.user,
+					user: userId, // 先固定會員ID
           content: body.content,
           tags: body.tags,
           type: body.type,
