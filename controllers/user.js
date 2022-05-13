@@ -1,5 +1,4 @@
 const handleSuccess = require('../service/handleSuccess');
-const handleError = require('../service/handleError');
 const User = require("../models/usersModel");
 
 const users = {

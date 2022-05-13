@@ -1,14 +1,9 @@
 const handleSuccess = require('../service/handleSuccess');
-const handleError = require('../service/handleError');
+const appError = require('../service/appError')
 const Post = require("../models/postsModel");
 
 const posts = {
   async getPosts(req, res) {
-    // const post = await Post.find().populate({
-		// 	path: 'user',
-		// 	select: 'name photo'
-		// });
-
 		// 貼文關鍵字搜尋與篩選
 		const timeSort = req.query.timeSort == "asc" ? "createdAt":"-createdAt"
 		const q = req.query.q !== undefined ? {"content": new RegExp(req.query.q)} : {};
@@ -18,65 +13,49 @@ const posts = {
 	  }).sort(timeSort);
     handleSuccess(res, post);
   },
-  async createdPosts(req, res) {
-    try {
-      const { body } = req;
-			const userId = '626bf8b06793149aa8f975f9';
-      if (body.content) {
-        const newPost = await Post.create({
-          // user: body.user,
-					user: userId, // 先固定會員ID
-          content: body.content,
-          tags: body.tags,
-          type: body.type,
-					image: body.image
-        })
-        handleSuccess(res, newPost);
-      } else {
-        handleError(res);
-      }
-    } catch (err){
-      handleError(res, err);
-    }
+  async createdPosts(req, res, next) {
+		const { body } = req;
+		const userId = '626bf8b06793149aa8f975f9';
+		if (body.content == undefined) {
+			return next(appError(400, "未填寫資料", next))
+		} else {
+			const newPost = await Post.create({
+				// user: body.user,
+				user: userId, // 先固定會員ID
+				content: body.content,
+				tags: body.tags,
+				type: body.type,
+				image: body.image
+			})
+			handleSuccess(res, newPost);
+		}
   },
-	async updatePosts(req, res) {
-		try {
-			const { body } = req;
-			if (body.content) {
-				const posts = await Post.findByIdAndUpdate(
-					req.params.id, 
-					{
-						content: req.body.content,
-						image: req.body.image,
-						name: req.body.name
-					},
-					{
-						returnDocument: 'after',
-					}
-				);
-				handleSuccess(res, posts);
-			} else {
-        handleError(res);
-      }
-		} catch (error) {
-			handleError(res);
+	async updatePosts(req, res, next) {
+		const { body } = req;
+		if (body.content == undefined) {
+			return next(appError(400, "未填寫資料", next))
+		} else{
+			const posts = await Post.findByIdAndUpdate(
+				req.params.id, 
+				{
+					content: req.body.content,
+					image: req.body.image,
+					name: req.body.name
+				},
+				{
+					returnDocument: 'after',
+				}
+			);
+			handleSuccess(res, posts);
 		}
 	},
-	async deleteAllPosts(req, res) {
-		try {
-			const post = await Post.deleteMany({});
-			handleSuccess(res, post);
-		} catch (error) {
-			handleError(res);
-		}
+	async deleteAllPosts(req, res, next) {
+		const post = await Post.deleteMany({});
+		handleSuccess(res, post);
 	},
-	async deleteSinglePosts(req, res) {
-		try {
-			const post = await Post.findByIdAndUpdate(req.params.id)
-			handleSuccess(res, post);
-		} catch (error) {
-			handleError(res);
-		}
+	async deleteSinglePosts(req, res, next) {
+		const post = await Post.findByIdAndUpdate(req.params.id)
+		handleSuccess(res, post);
 	},
 }
 
