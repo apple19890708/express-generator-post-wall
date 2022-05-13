@@ -15,13 +15,12 @@ const posts = {
   },
   async createdPosts(req, res, next) {
 		const { body } = req;
-		const userId = '626bf8b06793149aa8f975f9';
 		if (body.content == undefined) {
 			return next(appError(400, "未填寫資料", next))
 		} else {
 			const newPost = await Post.create({
 				// user: body.user,
-				user: userId, // 先固定會員ID
+				user: body.user,
 				content: body.content,
 				tags: body.tags,
 				type: body.type,
