@@ -6,112 +6,12 @@
 	},
 	"item": [
 		{
-			"name": "取得room",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "127.0.0.1:3005/rooms",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "3005",
-					"path": [
-						"rooms"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "新增room",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "新增room",
-					"host": [
-						"新增room"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "刪除所有資料",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "127.0.0.1:3005/rooms",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "3005",
-					"path": [
-						"rooms"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "刪除單筆資料",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "127.0.0.1:3005/rooms/625a70968877d98fb76b8833",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "3005",
-					"path": [
-						"rooms",
-						"625a70968877d98fb76b8833"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "修改單筆資料",
-			"request": {
-				"method": "PATCH",
-				"header": [],
-				"url": {
-					"raw": "127.0.0.1:3005/rooms/625a755c90e1fc2106886acb",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "3005",
-					"path": [
-						"rooms",
-						"625a755c90e1fc2106886acb"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "取得post",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "127.0.0.1:3005/posts",
+					"raw": "https://salty-badlands-98084.herokuapp.com/posts",
 					"protocol": "https",
 					"host": [
 						"salty-badlands-98084",
@@ -140,7 +40,7 @@
 					}
 				},
 				"url": {
-					"raw": "127.0.0.1:3005/posts",
+					"raw": "https://salty-badlands-98084.herokuapp.com/posts",
 					"host": [
 						"127",
 						"0",
@@ -161,7 +61,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "127.0.0.1:3005/posts/625b9e75f15f8dc10d1eb218",
+					"raw": "https://salty-badlands-98084.herokuapp.com/posts/625b9e75f15f8dc10d1eb218",
 					"host": [
 						"127",
 						"0",
@@ -184,7 +84,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \r\n}",
+					"raw": "{\r\n    \"content\": \"我不認識288\",\r\n    \"name\": \"蘋果\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -192,7 +92,7 @@
 					}
 				},
 				"url": {
-					"raw": "127.0.0.1:3005/posts/626537b8b9775b8c6911de6c",
+					"raw": "https://salty-badlands-98084.herokuapp.com/posts/626ba2839f56810cc00c4f67",
 					"host": [
 						"127",
 						"0",
@@ -202,7 +102,7 @@
 					"port": "3005",
 					"path": [
 						"posts",
-						"626537b8b9775b8c6911de6c"
+						"626ba2839f56810cc00c4f67"
 					]
 				}
 			},
