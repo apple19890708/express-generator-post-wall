@@ -32,7 +32,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"content\": \"我不認識\",\r\n    \"name\": \"橘子\"\r\n}",
+					"raw": "{\r\n    \"content\": \"我不認識\",\r\n    \"user\": \"626bf8b06793149aa8f975f9\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
