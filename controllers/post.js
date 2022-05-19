@@ -53,7 +53,7 @@ const posts = {
 		handleSuccess(res, post);
 	},
 	async deleteSinglePosts(req, res, next) {
-		const post = await Post.findByIdAndUpdate(req.params.id)
+		const post = await Post.findByIdAndDelete(req.params.id)
 		handleSuccess(res, post);
 	},
 }
