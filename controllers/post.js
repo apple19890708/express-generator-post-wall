@@ -20,7 +20,7 @@ const posts = {
 		} else {
 			const newPost = await Post.create({
 				// user: body.user,
-				user: body.user,
+				user: req.user.id,
 				content: body.content,
 				tags: body.tags,
 				type: body.type,
@@ -37,6 +37,7 @@ const posts = {
 			const posts = await Post.findByIdAndUpdate(
 				req.params.id, 
 				{
+					user: req.user.id,
 					content: req.body.content,
 					image: req.body.image,
 					name: req.body.name
@@ -53,7 +54,7 @@ const posts = {
 		handleSuccess(res, post);
 	},
 	async deleteSinglePosts(req, res, next) {
-		const post = await Post.findByIdAndUpdate(req.params.id)
+		const post = await Post.findByIdAndDelete(req.params.id)
 		handleSuccess(res, post);
 	},
 }
