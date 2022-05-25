@@ -24,7 +24,8 @@ const posts = {
 				content: body.content,
 				tags: body.tags,
 				type: body.type,
-				image: body.image
+				image: body.image,
+				likes: body.likes
 			})
 			handleSuccess(res, newPost);
 		}
@@ -57,6 +58,39 @@ const posts = {
 		const post = await Post.findByIdAndDelete(req.params.id)
 		handleSuccess(res, post);
 	},
+	async addLike(req, res, next) {
+		const id = req.params.id;
+		await Post.findOneAndUpdate( // 找到貼文ID
+			{ _id: id },
+			{ $addToSet: { likes: req.user.id } } // 把ID資訊放入 addToSet 如果原本有資訊就不會推入 ， push 不管裡面有沒有一樣ID都會推
+		);
+		res.send({
+      status: 'success',
+      postId: id,
+			userId: req.user.id
+    });
+	},
+	async cancelLike(req, res, next) {
+		const id = req.params.id;
+		await Post.findOneAndUpdate( // 找到貼文ID
+			{ _id: id },
+      { $pull: { likes: req.user.id } } // 
+		);
+		res.send({
+      status: 'success',
+      postId: id,
+			userId: req.user.id
+    });
+	},
+	async getUserInfo(req, res, next) {
+		const user = req.params.id;
+		const posts = await Post.find({ user });
+		res.send({
+      status: 'success',
+			results: posts.length,
+      posts
+    });
+	}
 }
 
 module.exports = posts;

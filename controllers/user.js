@@ -4,6 +4,7 @@ const appError = require('../service/appError');
 const validator = require('validator'); // 使用者資料驗證
 const bcrypt = require('bcryptjs');
 const {generateSendJWT} = require('../service/auth');
+const Post = require('../models/postsModel');
 
 const users = {
 	async getUsers(req, res) {
@@ -85,6 +86,29 @@ const users = {
       password: newPassword
     });
     generateSendJWT(user, 200, res);
+  },
+  async getLikeList(req, res, next) {
+    const likeList = await Post.find({
+      likes: { $in: [ req.user.id ] } // 再 POST資料表內尋找 likes陣列內的 user id 有符合的撈出 user資料表的 name、_id ; $in 表示 field 只要和 array 中的任意一个 value 相同，那么该文档就会被检索出来
+    }).populate({
+      path:'user',
+      select:"name _id"
+    });
+    res.send({
+      status: 'success',
+      likeList
+    });
+  },
+  async getUserCheck(req, res, next) {
+    if (!req.user) return appError(401, "此帳號無法使用，請聯繫管理員", next);
+    res.send({
+      status: true,
+      data: {
+        id: req.user._id,
+        name: req.user.name,
+        photo: req.user.photo,
+      },
+    });
   }
 };
 

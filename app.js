@@ -10,6 +10,7 @@ var cors = require('cors');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var postsRouter = require('./routes/posts');
+var uploadRouter = require('./routes/upload');
 
 var app = express();
 // 程式出現重大錯誤時
@@ -71,6 +72,7 @@ const login = function(req, res, next) {
 app.use('/', login, indexRouter);
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
+app.use('/upload', uploadRouter);
 
 // error catch 404
 
