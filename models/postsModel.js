@@ -25,10 +25,12 @@ const postSchema = new Schema(
 		// 		type: String,
 		// 		required: [true, '貼文姓名未填寫']
 		// },
-		likes: {
-				type:Number,
-				default:0
+		likes: [
+			{
+				type: mongoose.Schema.ObjectId,
+				ref: 'user'
 			}
+		]
 	}
 );
 const Post = model('Post', postSchema);
