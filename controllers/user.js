@@ -62,6 +62,20 @@ const users = {
       user: req.user
     });
   },
+  async updateUsersProfile(req, res, next) {
+    const { body } = req;
+    const data = await User.findByIdAndUpdate(
+      req.user._id,
+      {
+        name: body.name,
+      },
+      { new: true }
+    )
+    res.send({
+      status: 'success',
+      data
+    });
+  },
   async updatePassword(req, res, next) {
     const { password, confirmPassword } = req.body;
     if(password !== confirmPassword) {
