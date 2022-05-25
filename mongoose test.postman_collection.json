@@ -1,313 +1,524 @@
 {
 	"info": {
-		"_postman_id": "a71315ab-d24e-4e65-b7f3-0f07e97e271b",
+		"_postman_id": "e0f0a1dc-378d-4783-a51c-122c50675cee",
 		"name": "mongoose test",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "取得post",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2Y3YjAxZTNhMWJkOGNjOWI4MTU0MCIsImlhdCI6MTY1MzQ0OTk5OSwiZXhwIjoxNjU0MDU0Nzk5fQ.Bjw5c5eJlEwTHq_Yz_vD37smzLwMYemKLbcXLXroQzw",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "https://mysterious-cove-77258.herokuapp.com/posts",
-					"protocol": "https",
-					"host": [
-						"mysterious-cove-77258",
-						"herokuapp",
-						"com"
-					],
-					"path": [
-						"posts"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "新增post",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2Y3YjAxZTNhMWJkOGNjOWI4MTU0MCIsImlhdCI6MTY1MzQ0OTk5OSwiZXhwIjoxNjU0MDU0Nzk5fQ.Bjw5c5eJlEwTHq_Yz_vD37smzLwMYemKLbcXLXroQzw",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"user\": \"62877bd2c9be5ba664c1255f\",\r\n    \"content\": \"我不認識901qqqq\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "post",
+			"item": [
+				{
+					"name": "取得post",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2Y3YjAxZTNhMWJkOGNjOWI4MTU0MCIsImlhdCI6MTY1MzQ0OTk5OSwiZXhwIjoxNjU0MDU0Nzk5fQ.Bjw5c5eJlEwTHq_Yz_vD37smzLwMYemKLbcXLXroQzw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://mysterious-cove-77258.herokuapp.com/posts",
+							"protocol": "https",
+							"host": [
+								"mysterious-cove-77258",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"posts"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "https://mysterious-cove-77258.herokuapp.com/posts",
-					"protocol": "https",
-					"host": [
-						"mysterious-cove-77258",
-						"herokuapp",
-						"com"
-					],
-					"path": [
-						"posts"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "刪除單筆post資料",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2Y3YjAxZTNhMWJkOGNjOWI4MTU0MCIsImlhdCI6MTY1MzQ0OTk5OSwiZXhwIjoxNjU0MDU0Nzk5fQ.Bjw5c5eJlEwTHq_Yz_vD37smzLwMYemKLbcXLXroQzw",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "https://mysterious-cove-77258.herokuapp.com/posts/625b9e75f15f8dc10d1eb218",
-					"protocol": "https",
-					"host": [
-						"mysterious-cove-77258",
-						"herokuapp",
-						"com"
-					],
-					"path": [
-						"posts",
-						"625b9e75f15f8dc10d1eb218"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "修改post單筆資料",
-			"request": {
-				"method": "PATCH",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2Y3YjAxZTNhMWJkOGNjOWI4MTU0MCIsImlhdCI6MTY1MzQ0OTk5OSwiZXhwIjoxNjU0MDU0Nzk5fQ.Bjw5c5eJlEwTHq_Yz_vD37smzLwMYemKLbcXLXroQzw",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"content\": \"我是蘋果\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "新增post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2Y3YjAxZTNhMWJkOGNjOWI4MTU0MCIsImlhdCI6MTY1MzQ0OTk5OSwiZXhwIjoxNjU0MDU0Nzk5fQ.Bjw5c5eJlEwTHq_Yz_vD37smzLwMYemKLbcXLXroQzw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"我不認識90199999\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://mysterious-cove-77258.herokuapp.com/posts",
+							"protocol": "https",
+							"host": [
+								"mysterious-cove-77258",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"posts"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "https://mysterious-cove-77258.herokuapp.com/posts/6281fa75dfad0a4b311b94ef",
-					"protocol": "https",
-					"host": [
-						"mysterious-cove-77258",
-						"herokuapp",
-						"com"
-					],
-					"path": [
-						"posts",
-						"6281fa75dfad0a4b311b94ef"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "註冊帳號",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"apple19890708@gmial11.com\",\r\n    \"password\": \"qazwsx123\",\r\n    \"confirmPassword\": \"qazwsx123\",\r\n    \"name\": \"orange11\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "刪除單筆post資料",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2Y3YjAxZTNhMWJkOGNjOWI4MTU0MCIsImlhdCI6MTY1MzQ0OTk5OSwiZXhwIjoxNjU0MDU0Nzk5fQ.Bjw5c5eJlEwTHq_Yz_vD37smzLwMYemKLbcXLXroQzw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://mysterious-cove-77258.herokuapp.com/posts/625b9e75f15f8dc10d1eb218",
+							"protocol": "https",
+							"host": [
+								"mysterious-cove-77258",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"posts",
+								"625b9e75f15f8dc10d1eb218"
+							],
+							"query": [
+								{
+									"key": null,
+									"value": "",
+									"disabled": true
+								}
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "https://mysterious-cove-77258.herokuapp.com/users/sign_up",
-					"protocol": "https",
-					"host": [
-						"mysterious-cove-77258",
-						"herokuapp",
-						"com"
-					],
-					"path": [
-						"users",
-						"sign_up"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "登入帳號",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"apple19890708@gmial.com\",\r\n    \"password\": \"qazwsx1234\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "修改post單筆資料",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2Y3YjAxZTNhMWJkOGNjOWI4MTU0MCIsImlhdCI6MTY1MzQ0OTk5OSwiZXhwIjoxNjU0MDU0Nzk5fQ.Bjw5c5eJlEwTHq_Yz_vD37smzLwMYemKLbcXLXroQzw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"我是蘋果\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://mysterious-cove-77258.herokuapp.com/posts/6281fa75dfad0a4b311b94ef",
+							"protocol": "https",
+							"host": [
+								"mysterious-cove-77258",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"posts",
+								"6281fa75dfad0a4b311b94ef"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "https://mysterious-cove-77258.herokuapp.com/users/sign_in",
-					"protocol": "https",
-					"host": [
-						"mysterious-cove-77258",
-						"herokuapp",
-						"com"
-					],
-					"path": [
-						"users",
-						"sign_in"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "取得登入資訊",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2Y3YjAxZTNhMWJkOGNjOWI4MTU0MCIsImlhdCI6MTY1MzQ0OTk5OSwiZXhwIjoxNjU0MDU0Nzk5fQ.Bjw5c5eJlEwTHq_Yz_vD37smzLwMYemKLbcXLXroQzw",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "127.0.0.1:3005/users/profile",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "3005",
-					"path": [
-						"users",
-						"profile"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "更新密碼",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2Y3YjAxZTNhMWJkOGNjOWI4MTU0MCIsImlhdCI6MTY1MzQ0OTk5OSwiZXhwIjoxNjU0MDU0Nzk5fQ.Bjw5c5eJlEwTHq_Yz_vD37smzLwMYemKLbcXLXroQzw",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"password\": \"qazwsx1234\",\r\n    \"confirmPassword\": \"qazwsx1234\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "上傳圖片",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2Y3YjAxZTNhMWJkOGNjOWI4MTU0MCIsImlhdCI6MTY1MzQ0OTk5OSwiZXhwIjoxNjU0MDU0Nzk5fQ.Bjw5c5eJlEwTHq_Yz_vD37smzLwMYemKLbcXLXroQzw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"type": "file",
+									"src": "/C:/Users/apple/Downloads/下載.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://mysterious-cove-77258.herokuapp.com/upload",
+							"protocol": "https",
+							"host": [
+								"mysterious-cove-77258",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"upload"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "https://mysterious-cove-77258.herokuapp.com/users/updatePassword",
-					"protocol": "https",
-					"host": [
-						"mysterious-cove-77258",
-						"herokuapp",
-						"com"
-					],
-					"path": [
-						"users",
-						"updatePassword"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "取得所有使用者",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://mysterious-cove-77258.herokuapp.com/users",
-					"protocol": "https",
-					"host": [
-						"mysterious-cove-77258",
-						"herokuapp",
-						"com"
-					],
-					"path": [
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "更新登入資訊",
-			"request": {
-				"method": "PATCH",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2Y3YjAxZTNhMWJkOGNjOWI4MTU0MCIsImlhdCI6MTY1MzQ0OTk5OSwiZXhwIjoxNjU0MDU0Nzk5fQ.Bjw5c5eJlEwTHq_Yz_vD37smzLwMYemKLbcXLXroQzw",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"apple19890708\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "新增貼文的讚",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2Y3YjAxZTNhMWJkOGNjOWI4MTU0MCIsImlhdCI6MTY1MzQ0OTk5OSwiZXhwIjoxNjU0MDU0Nzk5fQ.Bjw5c5eJlEwTHq_Yz_vD37smzLwMYemKLbcXLXroQzw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "https://mysterious-cove-77258.herokuapp.com/posts/628db72d77afa050f132bb0f/likes",
+							"protocol": "https",
+							"host": [
+								"mysterious-cove-77258",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"posts",
+								"628db72d77afa050f132bb0f",
+								"likes"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "https://mysterious-cove-77258.herokuapp.com/users/profile",
-					"protocol": "https",
-					"host": [
-						"mysterious-cove-77258",
-						"herokuapp",
-						"com"
-					],
-					"path": [
-						"users",
-						"profile"
-					]
+				{
+					"name": "刪除貼文的讚",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2Y3YjAxZTNhMWJkOGNjOWI4MTU0MCIsImlhdCI6MTY1MzQ0OTk5OSwiZXhwIjoxNjU0MDU0Nzk5fQ.Bjw5c5eJlEwTHq_Yz_vD37smzLwMYemKLbcXLXroQzw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "127.0.0.1:3005/posts/628db72d77afa050f132bb0f/likes",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"posts",
+								"628db72d77afa050f132bb0f",
+								"likes"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
+		},
+		{
+			"name": "會員功能",
+			"item": [
+				{
+					"name": "註冊帳號",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"apple19890708@gmial11.com\",\r\n    \"password\": \"qazwsx123\",\r\n    \"confirmPassword\": \"qazwsx123\",\r\n    \"name\": \"orange11\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://mysterious-cove-77258.herokuapp.com/users/sign_up",
+							"protocol": "https",
+							"host": [
+								"mysterious-cove-77258",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users",
+								"sign_up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "登入帳號",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"apple19890708@gmial.com\",\r\n    \"password\": \"qazwsx1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://mysterious-cove-77258.herokuapp.com/users/sign_in",
+							"protocol": "https",
+							"host": [
+								"mysterious-cove-77258",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users",
+								"sign_in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得登入資訊",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2Y3YjAxZTNhMWJkOGNjOWI4MTU0MCIsImlhdCI6MTY1MzQ0OTk5OSwiZXhwIjoxNjU0MDU0Nzk5fQ.Bjw5c5eJlEwTHq_Yz_vD37smzLwMYemKLbcXLXroQzw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"apple19890708@gmial.com\",\r\n    \"password\": \"qazwsx123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://mysterious-cove-77258.herokuapp.com/users/profile",
+							"protocol": "https",
+							"host": [
+								"mysterious-cove-77258",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "更新密碼",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2Y3YjAxZTNhMWJkOGNjOWI4MTU0MCIsImlhdCI6MTY1MzQ0OTk5OSwiZXhwIjoxNjU0MDU0Nzk5fQ.Bjw5c5eJlEwTHq_Yz_vD37smzLwMYemKLbcXLXroQzw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"qazwsx1234\",\r\n    \"confirmPassword\": \"qazwsx1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://mysterious-cove-77258.herokuapp.com/users/updatePassword",
+							"protocol": "https",
+							"host": [
+								"mysterious-cove-77258",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users",
+								"updatePassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得所有使用者",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://mysterious-cove-77258.herokuapp.com/users",
+							"protocol": "https",
+							"host": [
+								"mysterious-cove-77258",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得按讚列表",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2Y3YjAxZTNhMWJkOGNjOWI4MTU0MCIsImlhdCI6MTY1MzQ0OTk5OSwiZXhwIjoxNjU0MDU0Nzk5fQ.Bjw5c5eJlEwTHq_Yz_vD37smzLwMYemKLbcXLXroQzw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://mysterious-cove-77258.herokuapp.com/users/getLikeList",
+							"protocol": "https",
+							"host": [
+								"mysterious-cove-77258",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users",
+								"getLikeList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得使用者發文列表",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2Y3YjAxZTNhMWJkOGNjOWI4MTU0MCIsImlhdCI6MTY1MzQ0OTk5OSwiZXhwIjoxNjU0MDU0Nzk5fQ.Bjw5c5eJlEwTHq_Yz_vD37smzLwMYemKLbcXLXroQzw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://mysterious-cove-77258.herokuapp.com/posts/user/627f7b01e3a1bd8cc9b81540",
+							"protocol": "https",
+							"host": [
+								"mysterious-cove-77258",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"posts",
+								"user",
+								"627f7b01e3a1bd8cc9b81540"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "檢查使用者狀態",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2Y3YjAxZTNhMWJkOGNjOWI4MTU0MCIsImlhdCI6MTY1MzQ0OTk5OSwiZXhwIjoxNjU0MDU0Nzk5fQ.Bjw5c5eJlEwTHq_Yz_vD37smzLwMYemKLbcXLXroQzw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://mysterious-cove-77258.herokuapp.com/users/getUserCheck",
+							"protocol": "https",
+							"host": [
+								"mysterious-cove-77258",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users",
+								"getUserCheck"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "更新登入資訊",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2Y3YjAxZTNhMWJkOGNjOWI4MTU0MCIsImlhdCI6MTY1MzQ0OTk5OSwiZXhwIjoxNjU0MDU0Nzk5fQ.Bjw5c5eJlEwTHq_Yz_vD37smzLwMYemKLbcXLXroQzw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"apple198907089\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://mysterious-cove-77258.herokuapp.com/users/profile",
+							"protocol": "https",
+							"host": [
+								"mysterious-cove-77258",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
