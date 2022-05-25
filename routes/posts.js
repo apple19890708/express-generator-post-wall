@@ -4,7 +4,7 @@ const router = express.Router();
 const PostsControllers = require('../controllers/post');
 const {isAuth} = require('../service/auth');
 
-router.get('/', PostsControllers.getPosts);
+router.get('/', isAuth, PostsControllers.getPosts);
 
 router.post('/', isAuth, handleErrorAsync(PostsControllers.createdPosts));
 
