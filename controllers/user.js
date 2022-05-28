@@ -8,7 +8,7 @@ const Post = require('../models/postsModel');
 
 const users = {
 	async getUsers(req, res) {
-    const allUsers = await User.find().sort("-createdAt");
+    const allUsers = await User.find().select("+password +isLogin").sort("-createdAt");
     handleSuccess(res, allUsers);
   },
   async signUpUser(req, res, next) {
@@ -40,7 +40,8 @@ const users = {
       password,
       name,
       photo: photo || "https://thumb.fakeface.rest/thumb_male_10_8c02e4e9bdc0e103530691acfca605f18caf1766.jpg",
-      role: "user"
+      role: "user",
+      isLogin: "false"
     });
       generateSendJWT(newUser,201,res);
   },
@@ -51,11 +52,20 @@ const users = {
     }
     const user = await User.findOne({ email }).select('+password');
     const auth = await bcrypt.compare(password, user.password);
+    await User.findByIdAndUpdate(user._id, { isLogin: true });
     if(!auth) {
       return next(appError(400, '密碼錯誤', next));
     }
     generateSendJWT(user, 200, res)
   },
+  async signOutUser(req, res, next) {
+    await User.findByIdAndUpdate(req.user._id, { isLogin: false }); // req.user 的來源是isAuth回傳的資料
+    res.send({ 
+      status: true,
+      message: "登出成功" 
+    });
+  },
+
   async getUsersProfile(req, res, next) {
     res.send({
       status: 'success',

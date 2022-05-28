@@ -26,6 +26,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     enum:["user","admin","main"]
   },
+  isLogin: {
+    type: Boolean,
+    default: false,
+    select: false,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
