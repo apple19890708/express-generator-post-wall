@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const path = require('path');
 const handleSuccess = require('../service/handleSuccess');
 const User = require("../models/usersModel");
 const appError = require('../service/appError');
