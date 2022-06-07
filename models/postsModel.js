@@ -31,8 +31,18 @@ const postSchema = new Schema(
 				ref: 'user'
 			}
 		]
+	}, {
+		versionKey: false,
+		toJSON: { virtuals: true },
+		toObject: { virtuals: true }
 	}
 );
+
+postSchema.virtual('comments', { // 在貼文內掛上虛擬欄位
+	ref: 'Comment',
+	foreignField: 'post',
+	localField: '_id' // 透過本地貼文 ID 尋找 comment 內相同 id 貼文
+});
 const Post = model('Post', postSchema);
 
 module.exports = Post;

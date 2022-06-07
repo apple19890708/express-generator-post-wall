@@ -21,7 +21,7 @@ process.on('uncaughtException', err => {
 	process.exit(1);
 });
 
-require('./connections')
+require('./connections');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -93,7 +93,7 @@ const resErrorProd = (err, res) => {
     // 送出罐頭預設訊息
     res.status(500).json({
       status: 'error',
-      message: '系統錯誤，請恰系統管理員'
+      message: err.message || '系統錯誤，請恰系統管理員'
     });
   }
 };

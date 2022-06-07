@@ -1,6 +1,7 @@
 const handleSuccess = require('../service/handleSuccess');
 const appError = require('../service/appError')
 const Post = require("../models/postsModel");
+const Comment = require('../models/commentsModel');
 
 const posts = {
   async getPosts(req, res) {
@@ -10,7 +11,10 @@ const posts = {
 		const post = await Post.find(q).populate({
 				path: 'user',
 				select: 'name photo'
-	  }).sort(timeSort);
+	  }).populate({
+			path: 'comments',
+			select: 'comment user'
+		}).sort(timeSort);
     handleSuccess(res, post);
   },
   async createdPosts(req, res, next) {
@@ -90,6 +94,23 @@ const posts = {
 			results: posts.length,
       posts
     });
+	},
+	async postCommentMessage(req, res, next) {
+		const user = req.user.id;
+		const post = req.params.id;
+		const { comment } = req.body;
+		const newComment = await Comment.create({
+			post,
+			user,
+			comment
+		});
+		res.send({
+      status: 'success',
+			data: {
+				comments: newComment
+			}
+    });
+
 	}
 }
 

@@ -21,4 +21,6 @@ router.delete('/:id/likes', isAuth, handleErrorAsync(PostsControllers.cancelLike
 
 router.get('/user/:id', handleErrorAsync(PostsControllers.getUserInfo));
 
+router.post('/:id/comment', isAuth, handleErrorAsync(PostsControllers.postCommentMessage))
+
 module.exports = router;
