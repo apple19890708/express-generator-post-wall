@@ -45,13 +45,14 @@ const generateSendJWT= (user, statusCode, res)=>{
   handleSuccess(res, userInfo)
 }
 
+// 第三方登入 回傳轉址
 const generateURLJWT= (user, res)=>{
   // 產生 JWT token
   const token = jwt.sign({id:user._id},process.env.JWT_SECRET,{
     expiresIn: process.env.JWT_EXPIRES_DAY
   });
   user.password = undefined;
-  res.redirect(`/callback?token=${token}&name=${user.name}`) // 要上到heroku 要補上它的網址，會重新導向到前端
+  res.redirect(`${process.env.HEROKU_URL}?token=${token}&name=${user.name}`) // 要上到heroku 要補上它的網址，會重新導向到前端
 }
 
 module.exports = {

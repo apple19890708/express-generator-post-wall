@@ -17,12 +17,14 @@ router.get('/getUserCheck', isAuth, handleErrorAsync(UsersControllers.getUserChe
 router.post('/:id/follow', isAuth, handleErrorAsync(UsersControllers.addFollowr));
 router.delete('/:id/unfollow', isAuth, handleErrorAsync(UsersControllers.cancelFollowing));
 router.get('/following', isAuth, handleErrorAsync(UsersControllers.getUserFollowing));
+// google登入
 router.get('/google', passport.authenticate('google', {
 	scope: ['email', 'profile']
 }));
-router.get('/google/callback', passport.authenticate('google', { session: false }), (req, res) => {
-	generateURLJWT(req.user, res);
-});
+// google callback
+router.get('/google/callback', passport.authenticate('google', { 
+	session: false,
+}), handleErrorAsync(UsersControllers.google));
 // 檢查註冊信
 router.get('/checkCode', handleErrorAsync(UsersControllers.checkCode));
 

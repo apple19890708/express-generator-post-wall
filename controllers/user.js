@@ -8,6 +8,7 @@ const bcrypt = require('bcryptjs');
 const {generateSendJWT} = require('../service/auth');
 const Post = require('../models/postsModel');
 const sendMail = require('../service/email');
+const thirdPartySignIn = require('../service/thirdPartySignIn');
 
 const idPath = '_id';
 
@@ -21,7 +22,7 @@ const users = {
     let { email, password, confirmPassword, name, photo } = req.body;
 
     const userData = await User.findOne({ email });
-    if (userData) {
+    if (userData && (userData.activeStatus === 'meta' || userData.activeStatus === 'both')) { // 啟用碼被啟用後才算，有可能放到過期
       return appError("400", '信箱已被使用', next);
     }
 
@@ -52,10 +53,10 @@ const users = {
     if(errArr.length > 0) {
       return next(appError("400", errArr, next));
     }
-    const activeCode = jwt.sign({ email, name }, process.env.JWT_SECRET, {
+    const activeCode = jwt.sign({ email, name }, process.env.JWT_SECRET, { // 建立啟用碼
       expiresIn: '1d',
     });
-    const mail = {
+    const mail = { //建立信件內容
       from: 'MetaWall <metawall001@gmail.com>',
       subject: '[MetaWall]帳號啟用確認信',
       to: email,
@@ -90,7 +91,7 @@ const users = {
   },
   // 帳號啟用檢查
 
-  async checkCode(req, res) {
+  async checkCode(req, res) { // 透過啟動碼連結檢查啟動碼是否過期
     // 解析token
     const decodedToken = await new Promise((resolve) => {
       jwt.verify(req.query.code, process.env.JWT_SECRET, (error, payload) => {
@@ -118,7 +119,7 @@ const users = {
     let activeStatus;
     if (userData.activeStatus === 'none') {
       activeStatus = 'meta';
-    } else if (userData.activeStatus === 'third') {
+    } else if (userData.activeStatus === 'third') { // 如果啟動狀態為之前已經有過的第三方登入則改成 both
       activeStatus = 'both';
     } else {
       // 已經啟用
@@ -133,6 +134,16 @@ const users = {
     res.sendFile(path.join(__dirname, '../public/emailCheckSuccess.html'));
   },
 
+  // 第三方登入（google）
+  async google(req, res) {
+    const data = {
+      id: req.user.sub,
+      email: req.user.email,
+      name: req.user.name,
+      picture: req.user.picture,
+    };
+    thirdPartySignIn('google', data, res);
+  },
 
   async signInUser(req, res, next) {
     const { email, password } = req.body;

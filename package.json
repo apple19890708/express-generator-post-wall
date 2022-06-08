@@ -27,6 +27,7 @@
     "passport": "^0.6.0",
     "passport-google-oauth20": "^2.0.0",
     "tslib": "^2.4.0",
+    "uuid": "^8.3.2",
     "validator": "^13.7.0"
   }
 }
