@@ -13,20 +13,5 @@ passport.use(new GoogleStrategy({
   },
   async (accessToken, refreshToken, profile, cb) => {
 		return cb(null, profile[jsonPath]);
-
-		// 舊方法
-		// const user = await User.findOne({ googleId: profile.id });
-		// if (user) {
-		// 	console.log('使用者存在');
-		// 	return cb(null, user);
-		// }
-		// const password = await bcrypt.hash('QAO7825ACL447', 12);
-		// const newUser = await User.create({
-		// 	email: profile.emails[0].value,
-		// 	name: profile.displayName,
-		// 	password,
-		// 	googleId: profile.id
-		// })
-		// return cb(null, newUser);
   }
 ));
