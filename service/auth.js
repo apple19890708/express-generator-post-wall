@@ -52,7 +52,7 @@ const generateURLJWT= (user, res)=>{
     expiresIn: process.env.JWT_EXPIRES_DAY
   });
   user.password = undefined;
-  res.redirect(`${process.env.WEBSITE_URL}/callback?token=${token}&id=${user._id}&name=${user.name}`) // 要上到heroku 要補上它的網址，會重新導向到前端
+  res.redirect(`${process.env.WEBSITE_URL}/callback?token=${token}&id=${user._id}&name=${user.name}&avatar=${user.avatar.url}&gender=${user.gender}`) // 要上到heroku 要補上它的網址，會重新導向到前端
 }
 
 module.exports = {
