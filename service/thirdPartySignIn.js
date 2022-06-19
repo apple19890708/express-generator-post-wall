@@ -24,12 +24,12 @@ const thirdPartySignIn = async (thirdPartyName, data, res) => {
       } else if (userExisted.activeStatus === 'meta') {
         userStateData = { activeStatus: 'both' };
       } else {
-				userStateData[key] = `${id}6666`; //為相對應的第三方登入加上ID
+				userStateData[key] = id; //為相對應的第三方登入加上ID
 				userStateData['isLogin'] = true;
       	await User.updateOne({ email }, userStateData);
-				await User.updateOne({ email }, {$set: {isLogin: true}});
 			}
 		}
+		await User.updateOne({ email }, {$set: {isLogin: true}});
 		user = userExisted;
 	} else {
 		const randomPasswordBase = uuid.v4();
@@ -42,7 +42,7 @@ const thirdPartySignIn = async (thirdPartyName, data, res) => {
 			isLogin: true,
       activeStatus: 'third',
     };
-		newUserData[key] = `${id}7777`;
+		newUserData[key] = id;
 		user = await User.create(newUserData);
 	}
 	generateURLJWT(user, res);
