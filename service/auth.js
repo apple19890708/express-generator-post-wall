@@ -27,7 +27,7 @@ const isAuth = handleErrorAsync(async (req, res, next) => {
       }
     })
   })
-  const currentUser = await User.findById(decoded.id);
+  const currentUser = await User.findById(decoded.id).select("+isLogin");
 
   req.user = currentUser; // 將自己需要的資料帶到下一步處理
   next();
