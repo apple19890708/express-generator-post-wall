@@ -9,7 +9,7 @@ const thirdPartySignIn = async (thirdPartyName, data, res) => {
     id, email, name, picture,
   } = data;
 	
-	const key = `${thirdPartyName}Ids`;
+	const key = `${thirdPartyName}Id`;
 	const userExisted = await User.findOne({ email }).select( //檢查使用者是否存在
     `+${key} +activeStatus`,
   );
@@ -26,6 +26,7 @@ const thirdPartySignIn = async (thirdPartyName, data, res) => {
       }
       userStateData[key] = id; //為相對應的第三方登入加上ID
 			userStateData['isLogin'] = true;
+			console.log('userStateData', userStateData)
       await User.updateOne({ email }, userStateData);
 		}
 		user = userExisted;
