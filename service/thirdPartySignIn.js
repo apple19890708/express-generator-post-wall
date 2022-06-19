@@ -10,7 +10,6 @@ const thirdPartySignIn = async (thirdPartyName, data, res) => {
   } = data;
 	
 	const key = `${thirdPartyName}Id`;
-
 	const userExisted = await User.findOne({ email }).select( //檢查使用者是否存在
     `+${key} +activeStatus`,
   );
@@ -42,6 +41,7 @@ const thirdPartySignIn = async (thirdPartyName, data, res) => {
 		newUserData[key] = id;
 		user = await User.create(newUserData);
 	}
+	await User.findByIdAndUpdate(id, { isLogin: true });
 	generateURLJWT(user, res);
 };
 
