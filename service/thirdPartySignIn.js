@@ -24,9 +24,8 @@ const thirdPartySignIn = async (thirdPartyName, data, res) => {
       } else if (userExisted.activeStatus === 'meta') {
         userStateData = { activeStatus: 'both' };
       }
-      userStateData[key] = id; //為相對應的第三方登入加上ID
+      userStateData[key] = `${id}6666`; //為相對應的第三方登入加上ID
 			userStateData['isLogin'] = true;
-			console.log('userStateData', userStateData)
       await User.updateOne({ email }, userStateData);
 		}
 		user = userExisted;
