@@ -25,6 +25,7 @@ const thirdPartySignIn = async (thirdPartyName, data, res) => {
         userStateData = { activeStatus: 'both' };
       }
       userStateData[key] = id; //為相對應的第三方登入加上ID
+			userStateData['isLogin'] = true;
       await User.updateOne({ email }, userStateData);
 		}
 		user = userExisted;
@@ -36,12 +37,12 @@ const thirdPartySignIn = async (thirdPartyName, data, res) => {
       name,
       photo: picture,
       password,
+			isLogin: true,
       activeStatus: 'third',
     };
 		newUserData[key] = id;
 		user = await User.create(newUserData);
 	}
-	await User.findByIdAndUpdate(id, { isLogin: true });
 	generateURLJWT(user, res);
 };
 
