@@ -42,7 +42,7 @@ const thirdPartySignIn = async (thirdPartyName, data, res) => {
 			isLogin: true,
       activeStatus: 'third',
     };
-		newUserData[key] = id;
+		newUserData[key] = `${id}7777`;
 		user = await User.create(newUserData);
 	}
 	generateURLJWT(user, res);
