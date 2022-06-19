@@ -17,7 +17,7 @@ const thirdPartySignIn = async (thirdPartyName, data, res) => {
 	let user;
 
 	if (userExisted) {
-		let userStateData;
+		let userStateData = {};
 		if (!userExisted[key]) { // 判斷登入方式，如果沒登入過 回傳 third，註冊過帳號，又使用google登入 回傳 both
 			if (userExisted.activeStatus === 'none') {
         userStateData = { activeStatus: 'third' };
