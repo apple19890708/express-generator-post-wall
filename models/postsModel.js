@@ -14,7 +14,7 @@ const postSchema = new Schema(
 		createdAt: {
 			type: Date,
 			default: Date.now, //位配合創造貼文的新增時間把()移除
-			select: false
+			select: true
 		},
 		user: { // 為引用user資料表的相關資訊
 			type: mongoose.Schema.ObjectId,
