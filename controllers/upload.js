@@ -4,7 +4,7 @@ const sizeOf = require('image-size');
 const { ImgurClient } = require('imgur');
 const upload = {
 	async uploadImg(req, res, next) {
-		if (!req.files.length) {
+		if (!req.length) {
 			return next(appError(400, "尚未上傳檔案", next));
 		}
 		// const dimension = sizeOf(req.files[0].buffer);
@@ -16,15 +16,20 @@ const upload = {
 			clientSecret: process.env.IMGUR_CLIENT_SECRET,
       refreshToken: process.env.IMGUR_REFRESH_TOKEN
 		})
-		const response = await client.upload({ // 會回傳一包物件資料
-			image: req.files[0].buffer.toString('base64'), // 將圖片轉成 base64
-			type: 'base64',
-			album: process.env.IMGUR_ALBUM_ID // 要放置的相簿名稱
-		})
-		res.send({
-      status: 'success',
-      imgUrl: response.data.link
-    });
+		const resData = [];
+		for (let item of req) {
+			const response = await client.upload({ // 會回傳一包物件資料
+				image: item.buffer.toString('base64'), // 將圖片轉成 base64
+				type: 'base64',
+				album: process.env.IMGUR_ALBUM_ID // 要放置的相簿名稱
+			})
+			const newImageInfo = {
+				url: response.data.link,
+				deletehash: response.data.deletehash,
+			}
+			resData.push(newImageInfo);
+		}
+		return resData;
 	}
 };
 

@@ -3,10 +3,11 @@ const handleErrorAsync = require("../service/handleErrorAsync");
 const router = express.Router();
 const PostsControllers = require('../controllers/post');
 const {isAuth} = require('../service/auth');
+const upload = require('../service/image');
 
 router.get('/', isAuth, PostsControllers.getPosts);
 
-router.post('/', isAuth, handleErrorAsync(PostsControllers.createdPosts));
+router.post('/', isAuth, upload, handleErrorAsync(PostsControllers.createdPosts));
 
 
 router.patch('/:id', isAuth, handleErrorAsync(PostsControllers.updatePosts));

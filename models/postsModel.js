@@ -7,10 +7,12 @@ const postSchema = new Schema(
 			type: String,
 			required: [true, 'Content 未填寫']
 		},
-		image: {
-			type:String,
-			default:""
-		},
+		image: [
+			{
+      	url: String,
+      	deleteHash: String,
+    	}
+		],
 		createdAt: {
 			type: Date,
 			default: Date.now, //位配合創造貼文的新增時間把()移除
