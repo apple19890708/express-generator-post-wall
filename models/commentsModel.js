@@ -27,7 +27,7 @@ const commentSchema = new mongoose.Schema(
 commentSchema.pre(/^find/, function(next) { // pre 為前置器的意思，如果有使用到 find 開頭的語法，就會觸發
 	this.populate({
 		path: 'user',
-		select: 'name id photo'
+		select: 'name id createdAt photo'
 	});
 	next();
 })
