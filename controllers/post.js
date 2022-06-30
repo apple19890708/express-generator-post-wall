@@ -97,12 +97,13 @@ const posts = {
     });
 	},
 	async postCommentMessage(req, res, next) {
+		const currentUser = req.user;
 		const user = req.user.id;
 		const post = req.params.id;
 		const { comment } = req.body;
 		const newComment = await Comment.create({
 			post,
-			user,
+			user: currentUser,
 			comment
 		});
 		res.send({
