@@ -152,7 +152,6 @@ const users = {
     }
     
     const user = await User.findOne({ email }).select('+password +activeStatus');
-    console.log('user', user)
     if (!user) {
       return appError(401, '信箱或密碼錯誤', next);
     }
