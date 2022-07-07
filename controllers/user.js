@@ -26,6 +26,10 @@ const users = {
       return appError("400", '信箱已被使用', next);
     }
 
+    if (userData.activeStatus === 'none' || userData.activeStatus === 'third') {
+      return appError(401, '尚未啟用一般登入', next);
+    }
+
     if (!validator.isLength(name, { min: 2 })) {
       errArr.push('暱稱至少 2 個字元以上')
     }
