@@ -26,10 +26,6 @@ const users = {
       return appError("400", '信箱已被使用', next);
     }
 
-    if (userData.activeStatus === 'none' || userData.activeStatus === 'third') {
-      return appError(401, '尚未啟用一般登入', next);
-    }
-
     if (!validator.isLength(name, { min: 2 })) {
       errArr.push('暱稱至少 2 個字元以上')
     }
@@ -154,7 +150,19 @@ const users = {
     if (!email || !password) {
       return next(appError(400, '帳號密碼不為空', next));
     }
-    const user = await User.findOne({ email }).select('+password');
+    
+    const user = await User.findOne({ email }).select('+password +activeStatus');
+    console.log('user', user)
+    if (!user) {
+      return appError(401, '信箱或密碼錯誤', next);
+    }
+    if (user.activeStatus === 'none' || user.activeStatus === 'third') {
+      return appError(401, '尚未啟用一般登入', next);
+    }
+    const result = await bcrypt.compare(password, user.password);
+    if (!result) {
+      return appError(401, '信箱或密碼錯誤', next);
+    }
     const auth = await bcrypt.compare(password, user.password);
     await User.findByIdAndUpdate(user._id, { isLogin: true });
     if(!auth) {
