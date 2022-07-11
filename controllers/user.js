@@ -9,6 +9,7 @@ const {generateSendJWT} = require('../service/auth');
 const Post = require('../models/postsModel');
 const sendMail = require('../service/email');
 const thirdPartySignIn = require('../service/thirdPartySignIn');
+const UploadControllers = require('./upload');
 
 const idPath = '_id';
 
@@ -185,16 +186,23 @@ const users = {
   },
   async updateUsersProfile(req, res, next) {
     const { body } = req;
-    const data = await User.findByIdAndUpdate(
+
+    const data = {
+      name: body.name,
+    };
+    if (req.files.length > 0) {
+      const resPhotoInfo = await UploadControllers.uploadImg(req.files);
+      data.photo = resPhotoInfo[0].url;
+    }
+
+    const resInfo = await User.findByIdAndUpdate(
       req.user._id,
-      {
-        name: body.name,
-      },
+      data,
       { new: true }
     )
     res.send({
       status: 'success',
-      data
+      resInfo
     });
   },
   async updatePassword(req, res, next) {

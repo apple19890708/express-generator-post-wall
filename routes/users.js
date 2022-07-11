@@ -4,13 +4,14 @@ const UsersControllers = require('../controllers/user');
 const handleErrorAsync = require("../service/handleErrorAsync");
 const {isAuth, generateURLJWT} = require('../service/auth');
 const passport = require('passport');
+const upload = require('../service/image');
 
 router.get('/', handleErrorAsync(UsersControllers.getUsers));
 router.post('/sign_up', handleErrorAsync(UsersControllers.signUpUser));
 router.post('/sign_in', handleErrorAsync(UsersControllers.signInUser));
 router.post('/sign_out', isAuth, handleErrorAsync(UsersControllers.signOutUser));
 router.get('/profile/', isAuth, handleErrorAsync(UsersControllers.getUsersProfile));
-router.patch('/profile/', isAuth, handleErrorAsync(UsersControllers.updateUsersProfile));
+router.patch('/profile/', isAuth, upload, handleErrorAsync(UsersControllers.updateUsersProfile));
 router.post('/updatePassword', isAuth, handleErrorAsync(UsersControllers.updatePassword));
 router.get('/getLikeList', isAuth, handleErrorAsync(UsersControllers.getLikeList));
 router.get('/getUserCheck', isAuth, handleErrorAsync(UsersControllers.getUserCheck));
