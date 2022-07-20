@@ -1,6 +1,5 @@
-const express = require('express');
+const router = require('express').Router();
 const handleErrorAsync = require("../service/handleErrorAsync");
-const router = express.Router();
 const PostsControllers = require('../controllers/post');
 const {isAuth} = require('../service/auth');
 const upload = require('../service/image');

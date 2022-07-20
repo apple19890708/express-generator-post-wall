@@ -69,6 +69,21 @@ const userSchema = new mongoose.Schema({
     default: 'none',
     select: false,
   },
+  chatRecord: {
+    type: [
+      {
+        roomId: {
+          type: mongoose.Schema.ObjectId,
+          ref: 'ChatRoom',
+        },
+        receiver: {
+          type: mongoose.Schema.ObjectId,
+          ref: 'user',
+        },
+      },
+    ],
+    default: [],
+  },
 },{
   versionKey: false,
 });

@@ -23,6 +23,7 @@ const upload = {
 				type: 'base64',
 				album: process.env.IMGUR_ALBUM_ID // 要放置的相簿名稱
 			})
+			console.log('response', response)
 			const newImageInfo = {
 				url: response.data.link,
 				deletehash: response.data.deletehash,
