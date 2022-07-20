@@ -178,6 +178,13 @@ const users = {
     });
   },
 
+  async getOtherUsersProfile(req, res, next) {
+    const userData = await User.findById(req.params.id);
+    res.send({
+      status: 'success',
+      user: userData
+    });
+  },
   async getUsersProfile(req, res, next) {
     res.send({
       status: 'success',
