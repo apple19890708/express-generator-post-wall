@@ -11,7 +11,7 @@ router.post('/sign_up', handleErrorAsync(UsersControllers.signUpUser));
 router.post('/sign_in', handleErrorAsync(UsersControllers.signInUser));
 router.post('/sign_out', isAuth, handleErrorAsync(UsersControllers.signOutUser));
 router.get('/profile/', isAuth, handleErrorAsync(UsersControllers.getUsersProfile));
-// router.get('/:id', isAuth, handleErrorAsync(UsersControllers.getOtherUsersProfile));
+router.get('/:id/getOtherProfile', isAuth, handleErrorAsync(UsersControllers.getOtherUsersProfile));
 router.patch('/profile/', isAuth, upload, handleErrorAsync(UsersControllers.updateUsersProfile));
 router.post('/updatePassword', isAuth, handleErrorAsync(UsersControllers.updatePassword));
 router.get('/getLikeList', isAuth, handleErrorAsync(UsersControllers.getLikeList));
