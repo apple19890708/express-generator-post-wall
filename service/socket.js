@@ -10,6 +10,7 @@ const console = require('./console');
 module.exports = (server) => {
 	const idPath = '_id';
 	const io = new Server(server, {
+		path: '/socket.io/',
     cors: {
       origin: "*",
     },

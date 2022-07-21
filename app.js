@@ -1,20 +1,20 @@
-const createError = require('http-errors');
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-const cors = require('cors');
-// const { console } = require('./service/console');
+var createError = require('http-errors');
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+var cors = require('cors');
+// var { console } = require('./service/console');
 
 
 //router
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-const postsRouter = require('./routes/posts');
-const uploadRouter = require('./routes/upload');
-const chatRouter = require('./routes/chat');
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+var postsRouter = require('./routes/posts');
+var uploadRouter = require('./routes/upload');
+var chatRouter = require('./routes/chat');
 
-const app = express();
+var app = express();
 // 程式出現重大錯誤時
 process.on('uncaughtException', err => {
   // 記錄錯誤下來，等到服務都處理完後，停掉該 process
@@ -42,8 +42,8 @@ app.use(function(req,res,next) {
 	next();
 })
 
-const login = function(req, res, next) {
-	const _url = req.url;
+var login = function(req, res, next) {
+	var _url = req.url;
 	if(_url !== '/') {
 		console.log('已登入');
 		next();
