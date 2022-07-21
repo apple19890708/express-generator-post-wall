@@ -137,6 +137,7 @@ const users = {
 
   // 第三方登入（google）
   async google(req, res) {
+    console.log('google', req, res)
     const data = {
       id: req.user.sub,
       email: req.user.email,
