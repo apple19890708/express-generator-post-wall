@@ -112,7 +112,7 @@ module.exports = (server) => {
     socket.emit('history', msgList);
     socket.use(([payload], next) => {
       console.log('payload', payload);
-      if (payload.message.length > 100) {
+      if (payload?.message?.length > 100) {
         return next(new Error('您輸入的內容過長'));
       }
       return next();
