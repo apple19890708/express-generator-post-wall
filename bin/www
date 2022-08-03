@@ -25,6 +25,7 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
+// 將在 server 處理號的 socket 在全域註冊
  const socket = require("../service/socket");
  const io = socket(server)
  // 全域註冊

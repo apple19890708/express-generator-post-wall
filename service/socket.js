@@ -9,6 +9,7 @@ const console = require('./console');
 
 module.exports = (server) => {
 	const idPath = '_id';
+  // 宣告 new Server 進行操作
 	const io = new Server(server, {
 		path: '/socket.io/',
     cors: {
@@ -40,6 +41,7 @@ module.exports = (server) => {
 
 	});
 
+  // 解碼 JWT 後取得使用者 ID
 	const getUserId = async (token) => {
     const decodedToken = await new Promise((resolve, reject) => {
       jwt.verify(token, process.env.JWT_SECRET, (error, payload) => {
@@ -110,7 +112,7 @@ module.exports = (server) => {
     socket.emit('history', msgList);
     socket.use(([payload], next) => {
       console.log('payload', payload);
-      if (payload?.message?.length > 100) {
+      if (payload.message.length > 100) {
         return next(new Error('您輸入的內容過長'));
       }
       return next();

@@ -39,7 +39,7 @@ const chatController = {
       },
       {
         $lookup: {
-          from: 'Users',
+          from: 'users',
           let: {
             receiverId: '$chatRecord.receiver',
             chatRecord: '$chatRecord',
