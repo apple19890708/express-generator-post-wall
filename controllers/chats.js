@@ -81,15 +81,15 @@ const chatController = {
     if (sender === receiver) {
       return next(appError(400, '自己不能跟自己聊天！', next));
     }
-    const queryResult = await User.findById(sender).select('chatRecord');
+    const queryResult = await User.findById(sender).select('chatRecord'); // 取得傳送者所有在 user 裡面的房間紀錄
     const { receiver: receiverRecord, roomId } = queryResult.chatRecord.find(
-      (item) => item.receiver.toString() === receiver,
+      (item) => item.receiver.toString() === receiver, // 比對並回傳符合接收者的 ID 房間資訊
     ) || {};
-    const receiverUser = await User.findById(receiver);
+    const receiverUser = await User.findById(receiver); // 取得接收者資訊
     if (!receiverUser) {
       return next(appError(400, '沒有這個人喔', next));
     }
-    const { name, avatar, _id } = receiverUser;
+    const { name, photo, _id } = receiverUser;
     // 已經有聊天記錄就直接回傳id
     let resData;
     if (receiverRecord) {
@@ -97,7 +97,7 @@ const chatController = {
         status: true,
         roomId,
         name,
-        avatar,
+        avatar: photo,
         _id,
       };
     } else {
@@ -115,7 +115,7 @@ const chatController = {
         status: true,
         roomId: newRoom[idPath],
         name,
-        avatar,
+        avatar: photo,
         _id,
       };
     }
