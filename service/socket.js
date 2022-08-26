@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const { Server } = require("socket.io");
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
@@ -6,7 +7,7 @@ const ChatRoom = require('../models/chatRoomModel');
 const User = require('../models/usersModel');
 
 const console = require('./console');
-
+const { ObjectId } = mongoose.Types;
 module.exports = (server) => {
 	const idPath = '_id';
   // 宣告 new Server 進行操作
@@ -75,7 +76,7 @@ module.exports = (server) => {
                     input: '$messages',
                     as: 'item',
                     cond: {
-                      $lt: ['$$item.createdAt', new Date(lastTime)],
+                      $lt: ['$$item.createdAt', new Date(lastTime)], // 取得時間小於 lastTime 的 30筆資料
                     },
                   },
                 },
@@ -84,15 +85,32 @@ module.exports = (server) => {
             },
           },
         },
+        // {
+        //   $lookup: {
+        //       from: "users",
+        //       localField: "messages.sender",
+        //       foreignField: "_id",
+        //       as: "patient_doc"
+        //   }
+        // }
       ]);
+      await User.populate([queryResult], {
+        path: "messages.sender",
+        select: 'name photo'
+      });
+      console.log('queryResult', queryResult)
       msgList = queryResult.messages;
     } else {
       msgList = await ChatRoom.find(
         { _id: room },
         { messages: { $slice: -30 } },
-      );
+      ).populate({
+				path: 'messages.sender',
+				select: 'name photo'
+	    });
       msgList = msgList[0].messages;
     }
+    console.log('msgList', msgList)
     return msgList;
   };
 
@@ -104,12 +122,32 @@ module.exports = (server) => {
 		let userId = await getUserId(token);
 		userId = userId.toString();
 		console.log('connection----', room);
+    const queryRoomMembersResult = await ChatRoom.findById(room).select('members'); // 查詢房間成員
+    const isInChatRoom = queryRoomMembersResult.members.some( 
+      (item) => {
+        return item.toString() === userId
+      } 
+    );
+    const UserName = await User.findById(userId).select("name")
+    if(!isInChatRoom) {
+      const createdAt = Date.now();
+      socket.emit('joinRoomMessage', UserName);
+      await ChatRoom.findByIdAndUpdate(room, {
+        $push: { members: ObjectId(userId) },
+      });
+     
+    }
     if (room) { // 連線成功後即將使用者加入房間
       socket.join(room);
+      const createdAt = Date.now();
+      if (!isInChatRoom) {
+        await ChatRoom.findByIdAndUpdate(room, {
+          $push: { messages: { sender: ObjectId('63048cc67c20701d55af0f2b'), message: `歡迎，${UserName.name} 加入聊天室`, createdAt } },
+        });
+      }
     }
-		
-		const msgList = await getHistory(room);
-    socket.emit('history', msgList);
+    const msgList = await getHistory(room);
+    socket.emit('history', msgList); // 連線成功後先打一次歷史訊息給前端
     socket.use(([payload], next) => {
       console.log('payload', payload);
       if (payload?.message?.length > 100) {
@@ -125,10 +163,11 @@ module.exports = (server) => {
       await ChatRoom.findByIdAndUpdate(room, {
         $push: { messages: { sender: userId, message, createdAt } },
       });
+      const currentUser = await User.findById(userId);
       // 針對該房間廣播訊息
       io.of('/chat')
         .to(room)
-        .emit('chatMessage', { message, sender: userId, createdAt });
+        .emit('chatMessage', { message, sender: {_id: userId, photo: currentUser.photo}, createdAt });
     });
 
 		// 使用者輸入中

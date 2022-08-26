@@ -47,7 +47,7 @@ const chatController = {
           pipeline: [
             { $match: { $expr: { $eq: ['$_id', '$$receiverId'] } } },
             {
-              $project: { avatar: 1, name: 1, _id: 0 },
+              $project: { photo: 1, name: 1, _id: 0 },
             },
           ],
           as: 'user',
@@ -63,7 +63,7 @@ const chatController = {
         $replaceRoot: {
           newRoot: {
             message: '$message.message',
-            avatar: '$user.avatar',
+            avatar: '$user.photo',
             name: '$user.name',
             roomId: '$chatRecord.roomId',
           },
@@ -105,10 +105,10 @@ const chatController = {
       const newRoom = await ChatRoom.create({
         members: [ObjectId(sender), ObjectId(receiver)],
       });
-      await User.findByIdAndUpdate(sender, {
+      await User.findByIdAndUpdate(sender, { // 傳送者更新 chatRecord紀錄
         $push: { chatRecord: { roomId: newRoom[idPath], receiver } },
       });
-      await User.findByIdAndUpdate(receiver, {
+      await User.findByIdAndUpdate(receiver, { // 接收者更新 chatRecord紀錄
         $push: { chatRecord: { roomId: newRoom[idPath], receiver: sender } },
       });
       resData = {
