@@ -7,8 +7,30 @@ const { ObjectId } = mongoose.Types;
 const idPath = '_id';
 
 const chatController = {
+  async getOpenChatRecord(req, res) {
+    const queryResult = await ChatRoom.aggregate([
+      { $match: { roomType: 1 } },
+      {
+        $project: { messages: 1, _id: 1 },
+      },
+      {
+        $replaceRoot: {
+          newRoot: { 
+            message: { $slice: ['$messages', -1] },
+            id: '$_id' 
+          },
+        },
+      },
+    ])
+    await User.populate([queryResult], {
+      path: "message.sender",
+      select: 'name photo'
+    });
+    return res.send({ status: true, chatRecord: queryResult });
+    console.log('queryResult', queryResult);
+  },
   async getChatRecord(req, res) {
-    const queryResult = await User.aggregate([
+    const queryResult = await User.aggregate([ // 以 user 的 chatRecord 撈詳細資料
       { $match: { _id: req.user[idPath] } },
       {
         $project: { chatRecord: 1 },

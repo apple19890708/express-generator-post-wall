@@ -94,7 +94,7 @@ module.exports = (server) => {
         //   }
         // }
       ]);
-      await User.populate([queryResult], {
+      await User.populate([queryResult], { // call populate with the aggregation result returned from aggergate
         path: "messages.sender",
         select: 'name photo'
       });
