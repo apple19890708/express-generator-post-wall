@@ -16,7 +16,7 @@ const chatController = {
       {
         $replaceRoot: {
           newRoot: { 
-            messages: { $slice: ['$messages', -1] },
+            message: { $slice: ['$messages', -1] },
             id: '$_id' ,
             roomType: 1,
           },
