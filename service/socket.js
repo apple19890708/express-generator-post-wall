@@ -167,7 +167,7 @@ module.exports = (server) => {
       // 針對該房間廣播訊息
       io.of('/chat')
         .to(room)
-        .emit('chatMessage', { message, sender: {_id: userId, photo: currentUser.photo}, createdAt });
+        .emit('chatMessage', { message, sender: {_id: userId, photo: currentUser.photo, name: currentUser.name }, createdAt });
     });
 
 		// 使用者輸入中
