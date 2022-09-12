@@ -16,8 +16,9 @@ const chatController = {
       {
         $replaceRoot: {
           newRoot: { 
-            message: { $slice: ['$messages', -1] },
-            id: '$_id' 
+            messages: { $slice: ['$messages', -1] },
+            id: '$_id' ,
+            roomType: 1,
           },
         },
       },
@@ -88,6 +89,7 @@ const chatController = {
             avatar: '$user.photo',
             name: '$user.name',
             roomId: '$chatRecord.roomId',
+            roomType: 0,
           },
         },
       },

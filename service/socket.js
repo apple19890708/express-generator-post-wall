@@ -150,9 +150,9 @@ module.exports = (server) => {
     socket.emit('history', msgList); // 連線成功後先打一次歷史訊息給前端
     socket.use(([payload], next) => {
       console.log('payload', payload);
-      if (payload?.message?.length > 100) {
-        return next(new Error('您輸入的內容過長'));
-      }
+      // if (payload.message.length > 100) {
+      //   return next(new Error('您輸入的內容過長'));
+      // }
       return next();
     });
 
