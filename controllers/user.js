@@ -10,6 +10,7 @@ const Post = require('../models/postsModel');
 const sendMail = require('../service/email');
 const thirdPartySignIn = require('../service/thirdPartySignIn');
 const UploadControllers = require('./upload');
+const { validationResult } = require('express-validator');
 
 const idPath = '_id';
 
@@ -177,7 +178,38 @@ const users = {
       message: "登出成功" 
     });
   },
+// 忘記密碼
+  async forgetPassword(req, res, next) {
+    const { errors } = validationResult(req);
+    if (errors.length > 0) {
+      return appError(400, '輸入資料錯誤', next);
+    }
 
+    const { email } = req.body;
+
+    const userData = await User.findOne({ email });
+    if (!userData) {
+      return appError(400, '信箱未註冊', next);
+    }
+
+    const activeCode = jwt.sign({ email, name: userData.name, mode: 'forgetPassword' }, process.env.JWT_SECRET, {
+      expiresIn: '1d',
+    });
+
+    const mail = {
+      from: 'MetaWall <metawall001@gmail.com>',
+      subject: '[MetaWall]密碼重置確認信',
+      to: email,
+      text: `尊敬的 ${userData.name} 您好！請點選連結進入 MetaWall 修改您的帳號密碼，[${process.env.HEROKU_URL}/users/checkCode?code=${activeCode}] 為保障您的帳號安全，請在24小時內點選該連結，您也可以將連結複製到瀏覽器位址列訪問。`,
+    };
+    const result = await sendMail(mail);
+
+    if (!result.startsWith('250 2.0.0 OK')) {
+      return appError(422, '寄送信件失敗', next);
+    }
+
+    return res.send({ status: true, message: '已將密碼變更信件寄送至您的信箱' });
+  },
   async getOtherUsersProfile(req, res, next) {
     const userData = await User.findById(req.params.id);
     res.send({

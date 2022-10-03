@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const userValidator = require('../validator/users');
 const UsersControllers = require('../controllers/user');
 const handleErrorAsync = require("../service/handleErrorAsync");
 const {isAuth, generateURLJWT} = require('../service/auth');
@@ -19,6 +20,8 @@ router.get('/getUserCheck', isAuth, handleErrorAsync(UsersControllers.getUserChe
 router.post('/:id/follow', isAuth, handleErrorAsync(UsersControllers.addFollowr));
 router.delete('/:id/unfollow', isAuth, handleErrorAsync(UsersControllers.cancelFollowing));
 router.get('/following', isAuth, handleErrorAsync(UsersControllers.getUserFollowing));
+// 檢查註冊信
+router.post('/forget-password', userValidator.email, handleErrorAsync(UsersControllers.forgetPassword));
 // google登入
 router.get('/google', passport.authenticate('google', {
 	scope: ['email', 'profile']
