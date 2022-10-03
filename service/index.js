@@ -1,7 +1,7 @@
-const { isAuth, generateUrlJWT, generateSendJWT } = require('./auth');
+const { isAuth, generateURLJWT, generateSendJWT } = require('./auth');
 
 module.exports = {
   isAuth,
-  generateUrlJWT,
+  generateURLJWT,
   generateSendJWT,
 };
