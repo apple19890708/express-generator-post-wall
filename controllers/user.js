@@ -5,7 +5,7 @@ const User = require("../models/usersModel");
 const appError = require('../service/appError');
 const validator = require('validator'); // 使用者資料驗證
 const bcrypt = require('bcryptjs');
-const { generateSendJWT, generateUrlJWT } = require('../service');
+const { generateSendJWT, generateURLJWT } = require('../service');
 const Post = require('../models/postsModel');
 const sendMail = require('../service/email');
 const thirdPartySignIn = require('../service/thirdPartySignIn');
@@ -119,7 +119,7 @@ const users = {
     }
     if (decodedToken?.mode && decodedToken.mode === 'forgetPassword') {
       userData.mode = 'forgetPassword';
-      return generateUrlJWT(userData, res);
+      return generateURLJWT(userData, res);
     }
 
     // 更新啟用狀態

@@ -46,7 +46,7 @@ const generateSendJWT= (user, statusCode, res)=>{
 }
 
 // 第三方登入 回傳轉址
-const generateUrlJWT = (user, res) => {
+const generateURLJWT = (user, res) => {
   const token = jwt.sign({ id:user._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_DAY,
   });
