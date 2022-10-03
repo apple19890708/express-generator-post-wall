@@ -3,7 +3,7 @@ const router = express.Router();
 const userValidator = require('../validator/users');
 const UsersControllers = require('../controllers/user');
 const handleErrorAsync = require("../service/handleErrorAsync");
-const {isAuth, generateURLJWT} = require('../service/auth');
+const { isAuth } = require('../service/auth');
 const passport = require('passport');
 const upload = require('../service/image');
 

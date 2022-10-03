@@ -5,7 +5,8 @@ const User = require("../models/usersModel");
 const appError = require('../service/appError');
 const validator = require('validator'); // 使用者資料驗證
 const bcrypt = require('bcryptjs');
-const { generateSendJWT, generateURLJWT } = require('../service/auth');
+const { generateSendJWT } = require('../service/auth');
+const { generateURLJWT } = require('../service/auth');
 const Post = require('../models/postsModel');
 const sendMail = require('../service/email');
 const thirdPartySignIn = require('../service/thirdPartySignIn');
@@ -117,8 +118,8 @@ const users = {
       return;
     }
 
+    console.log('decodedToken', decodedToken, generateUrlJWT, 'generateUrlJWT')
     if (decodedToken?.mode && decodedToken.mode === 'forgetPassword') {
-      console.log('generateUrlJWT', generateUrlJWT)
       userData.mode = 'forgetPassword';
       return generateUrlJWT(userData, res);
     }
