@@ -117,6 +117,11 @@ const users = {
       return;
     }
 
+    if (decodedToken?.mode && decodedToken.mode === 'forgetPassword') {
+      userData.mode = 'forgetPassword';
+      return generateUrlJWT(userData, res);
+    }
+
     // 更新啟用狀態
     let activeStatus;
     if (userData.activeStatus === 'none') {
