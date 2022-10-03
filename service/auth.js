@@ -50,7 +50,7 @@ const generateURLJWT = (user, res) => {
   const token = jwt.sign({ id:user._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_DAY,
   });
-  let path = `${process.env.WEBSITE_URL}/profile/settings?token=${token}&id=${user._id}&name=${user.name}&avatar=${user.photo}`;
+  let path = `${process.env.WEBSITE_URL}/callback?token=${token}&id=${user._id}&name=${user.name}&avatar=${user.photo}`;
   if (user?.mode) {
     path += `&mode=${user.mode}`;
   }
