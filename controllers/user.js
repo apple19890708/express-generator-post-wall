@@ -118,6 +118,7 @@ const users = {
     }
 
     if (decodedToken?.mode && decodedToken.mode === 'forgetPassword') {
+      console.log('generateUrlJWT', generateUrlJWT)
       userData.mode = 'forgetPassword';
       return generateUrlJWT(userData, res);
     }
