@@ -112,14 +112,12 @@ const users = {
     const userData = await User.findOne({
       email: decodedToken.email,
     }).select('+activeStatus');
-    console.log('decodedToken', decodedToken, generateUrlJWT, 'generateUrlJWT')
+    console.log('decodedToken', decodedToken, 'generateUrlJWT')
     // 再次確認
     if (!userData) {
       res.sendFile(path.join(__dirname, '../public/emailCheckFailed.html'));
       return;
     }
-
-    console.log('decodedToken', decodedToken, generateUrlJWT, 'generateUrlJWT')
     // if (decodedToken?.mode && decodedToken.mode === 'forgetPassword') {
     //   userData.mode = 'forgetPassword';
     //   return generateUrlJWT(userData, res);
