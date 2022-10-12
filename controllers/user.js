@@ -265,7 +265,7 @@ const users = {
       likes: { $in: [ req.user.id ] } // 再 POST資料表內尋找 likes陣列內的 user id 有符合的撈出 user資料表的 name、_id ; $in 表示 field 只要和 array 中的任意一个 value 相同，那么该文档就会被检索出来
     }).populate({
       path:'user',
-      select:"name _id"
+      select:"name _id photo"
     });
     res.send({
       status: 'success',
@@ -359,12 +359,23 @@ const users = {
     });
   },
   async getUserFollowing(req, res, next) {
-    const following = await User.find({
+    const list = await User.find({
       'followers.user': { $in: [req.user._id] } // 在 User 資料表內尋找 followers user 為 req.user._id 的資料
-    }).select('name photo _id');
+    }).select('name photo _id followers');
+    const followList = list.map((item) => {
+      const newList = {
+        id: item._id,
+        name: item.name,
+        photo: item.photo,
+      }
+      item.followers.forEach((followItem) => {
+        newList.followCreatedAt = followItem.createdAt;
+      })
+      return newList;
+    })
     res.send({
       status: 'success',
-      following
+      followList
     });
   }
 };
