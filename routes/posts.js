@@ -19,7 +19,7 @@ router.post('/:id/likes', isAuth, handleErrorAsync(PostsControllers.addLike));
 
 router.delete('/:id/likes', isAuth, handleErrorAsync(PostsControllers.cancelLike));
 
-router.get('/user/:id', handleErrorAsync(PostsControllers.getUserInfo));
+router.get('/user/:id', handleErrorAsync(PostsControllers.getOnePost));
 
 router.post('/:id/comment', isAuth, handleErrorAsync(PostsControllers.postCommentMessage))
 

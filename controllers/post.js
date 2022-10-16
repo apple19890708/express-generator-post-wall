@@ -87,14 +87,19 @@ const posts = {
 			userId: req.user.id
     });
 	},
-	async getUserInfo(req, res, next) {
-		const user = req.params.id;
-		const posts = await Post.find({ user });
-		res.send({
-      status: 'success',
-			results: posts.length,
-      posts
+	async getOnePost(req, res, next) {
+
+		const post = await Post.find({ _id: req.params.id })
+		.populate({
+      path: 'user',
+      select: 'name photo',
+    })
+		.populate({
+      path: 'comments',
     });
+    // 無資料，回傳空陣列
+    res.send({ status: true, data: post });
+
 	},
 	async postCommentMessage(req, res, next) {
 		const currentUser = req.user;
