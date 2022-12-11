@@ -149,7 +149,7 @@ module.exports = (server) => {
     const msgList = await getHistory(room);
     socket.emit('history', msgList); // 連線成功後先打一次歷史訊息給前端
     socket.use(([payload], next) => {
-      console.log('payload', payload);
+      console.log('payloads', payload);
       if (payload?.message?.length > 100) {
         return next(new Error('您輸入的內容過長'));
       }
